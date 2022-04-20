@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+
+import sys, os, csv, subprocess
+from printables import Table
+from shutil import get_terminal_size
+
+path = os.path.dirname(__file__) + os.sep
+
+def fetch_data(name):
+    data = []
+    with open("{}data{}.csv".format(path, os.sep + name)) as file:
+        for line in csv.reader(file):
+            row = []
+            for string in line:
+                row.append(string.strip())
+            data.append(row)
+        file.close()
+    return data
+
+def main(args):
+    available_files = os.listdir(path + "data")
+    available_files.sort()
+
+    # Enable ANSI colors in win
+    os.system("")
+
+    if len(args) == 1:
+        for file in available_files:
+            name = file.replace(".csv", "")
+            data = fetch_data(name)
+            t = Table(data)
+            t.addLabel(name)
+            t.setWidth(get_terminal_size((80, 24))[0])
+            print(t.toString())
+    else:
+        try:
+            if args[1] == "list":
+                for file in available_files:
+                    print(file.replace(".csv", ""))
+                return
+            
+            if len(args) == 3 and args[2] != "":
+                csv_path = path + "data{}.csv".format(os.sep + args[2])
+
+                if args[1] == "remove":
+                    os.remove(csv_path)
+
+                if args[1] == "write":
+                    subprocess.call(["nano", csv_path])
+                return
+                    
+            t = Table(fetch_data(args[1]))
+            t.addLabel(args[1])
+            t.setWidth(get_terminal_size((80, 24))[0])
+            print(t.toString())
+
+        except FileNotFoundError:
+            print("No file found.")
+
+class color:
+    dict = {
+        "reset": 0,
+        "red": 91,
+        "green": 92,
+        "yellow": 93,
+        "blue": 94,
+        "magenta": 95,
+        "cyan": 96,
+        "white": 97
+    }
+
+    def get(color):
+        return "\033[{}m".format(color)
+
+main(sys.argv)
