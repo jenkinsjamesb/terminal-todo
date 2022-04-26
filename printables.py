@@ -60,7 +60,7 @@ class Table:
                 for string in data[len(data) - 1]:
                     # If a word gets cut off, add a hyphen
                     line = string[:cutoff]
-                    if len(line) >= cutoff and string[len(line)] != " ":
+                    if len(string) > cutoff and string[len(line)] != " ":
                         line += "-"
                     # If a line ends in " -", clip it
                         # This happens because a word can get cut off at the first letter
