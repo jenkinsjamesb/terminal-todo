@@ -45,7 +45,7 @@ class Table:
                 result += "+"
         return result + "+\n"
 
-    # Truncates long strings and formats a row into multple lines that fit within the table
+    # Truncates long strings and formats a row into multiple lines that fit within the table
     def makeRow(self, data):
         cutoff = self.col_width - 4 # The # of available characters in 1 line of a cell
 
