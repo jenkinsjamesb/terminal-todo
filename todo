@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import sys, os, csv, subprocess
 from printables import Table
 from shutil import get_terminal_size
@@ -34,6 +33,7 @@ def main(args):
             print(t.toString())
     else:
         try:
+            # add help
             if args[1] == "list":
                 for file in available_files:
                     print(file.replace(".csv", ""))
@@ -44,9 +44,10 @@ def main(args):
 
                 if args[1] == "remove":
                     os.remove(csv_path)
-
-                if args[1] == "write":
+                elif args[1] == "write":
                     subprocess.call(["nano", csv_path])
+                else:
+                    print("Unrecognized subcommand: \"{}\"".format(args[1]))
                 return
                     
             t = Table(fetch_data(args[1]))
@@ -56,20 +57,5 @@ def main(args):
 
         except FileNotFoundError:
             print("No file found.")
-
-class color:
-    dict = {
-        "reset": 0,
-        "red": 91,
-        "green": 92,
-        "yellow": 93,
-        "blue": 94,
-        "magenta": 95,
-        "cyan": 96,
-        "white": 97
-    }
-
-    def get(color):
-        return "\033[{}m".format(color)
 
 main(sys.argv)

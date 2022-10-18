@@ -1,3 +1,5 @@
+import re
+
 class Table:
     # Default values to indicate error/initialize w/ no label
     data = [ ["Something went wrong."] ]
