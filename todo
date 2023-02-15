@@ -52,7 +52,7 @@ def main(args):
                     
             t = Table(fetch_data(args[1]))
             t.addLabel(args[1])
-            t.setWidth(get_terminal_size((80, 24))[0])
+            t.setWidth(get_terminal_size((80, 24))[0] - 1)
             print(t.toString())
 
         except FileNotFoundError:

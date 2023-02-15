@@ -18,7 +18,7 @@ class Table:
                 self.cols = i
 
         # Declare/Initialize miscellaneous values used throughout
-        self.col_width = int(self.width / self.cols) - 1
+        self.col_width = round(self.width / self.cols) - 1
         self.table_width = self.width - self.width % self.col_width
 
     # Method for user to add a label/title to the table
@@ -28,7 +28,7 @@ class Table:
     # Method for user to set width manually
     def setWidth(self, width):
         self.width = width
-        self.col_width = int(self.width / self.cols) - 1
+        self.col_width = round(self.width / self.cols) - 1
         self.table_width = self.width - self.width % self.col_width
 
     # Creates the horizontal dividers of the table, with or without the label
