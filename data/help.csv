@@ -1,0 +1,5 @@
+command,effect
+help,shows this page
+write <name>,edits or creates a table in the data directory
+<name>,displays table
+remove <name>,permanently deletes a table
